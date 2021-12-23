@@ -1,4 +1,4 @@
-const colours = ['red', 'orange', 'yellow', 'green', 'blue', 'indigo', 'violet'];
+const colours = ['aqua', 'red', 'yellow', 'green', 'blue', 'indigo'];
 const getRandomColour = () => colours[Math.floor(Math.random() * colours.length)];
 const generateAnswer = () => [getRandomColour(), getRandomColour(), getRandomColour(), getRandomColour()];
 const checkAnswers = (guess, answer) => {
@@ -21,10 +21,12 @@ const checkAnswers = (guess, answer) => {
 
   return [blacks, whites];
 };
+const getNextColour = existingColour => colours[(colours.indexOf(existingColour) + 1) % colours.length];
+
 
 // export for unit testing only
 if (typeof module !== 'undefined') {
   module.exports = {
-    colours, getRandomColour, generateAnswer, checkAnswers
+    colours, getRandomColour, generateAnswer, checkAnswers, getNextColour
   };
 }

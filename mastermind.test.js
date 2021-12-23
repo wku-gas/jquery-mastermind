@@ -1,5 +1,5 @@
 /* eslint-disable no-undef */
-const { colours, getRandomColour, generateAnswer, checkAnswers } = require('./mastermind.js')
+const { colours, getRandomColour, generateAnswer, checkAnswers, getNextColour } = require('./mastermind.js')
 
 test('#colours', () => {
   expect(colours.length).toBe(7);
@@ -20,4 +20,15 @@ test('#checkAnswers', () => {
   expect(checkAnswers(['red', 'blue', 'green', 'yellow'], ['red', 'blue', 'green', 'red'])).toEqual([3, 0]);
   expect(checkAnswers(['red', 'red', 'red', 'blue'], ['red', 'red', 'blue', 'blue'])).toEqual([3, 0]);
   expect(checkAnswers(['red', 'red', 'red', 'red'], ['red', 'red', 'red', 'red'])).toEqual([4, 0]);
+});
+
+test('#getNextColour', () => {
+  expect(getNextColour()).toBe('red');
+  expect(getNextColour('red')).toBe('orange');
+  expect(getNextColour('orange')).toBe('yellow');
+  expect(getNextColour('yellow')).toBe('green');
+  expect(getNextColour('green')).toBe('blue');
+  expect(getNextColour('blue')).toBe('indigo');
+  expect(getNextColour('indigo')).toBe('violet');
+  expect(getNextColour('violet')).toBe('red');
 });
