@@ -1,20 +1,21 @@
-const answer = generateAnswer()
-const maxAttempts = 5
-let attempts = 0
+/* eslint-disable no-undef */
+const answer = generateAnswer();
+const maxAttempts = 5;
+let attempts = 0;
 
 const getPegColour = $peg => {
-  const colour = $.Color($peg, 'background-color')
+  const colour = $.Color($peg, 'background-color');
 
-  return getColourName(colour)
-}
+  return getColourName(colour);
+};
 
 const getColourName = colour => {
-  return colour ? colours.filter(c => $.Color(colour).is(c))[0] : undefined
-}
+  return colour ? colours.filter(c => $.Color(colour).is(c))[0] : undefined;
+};
 
 const getGuess = () => {
-  return $('.attempt .peg').toArray().map(p => getColourName(p.style?.backgroundColor))
-}
+  return $('.attempt .peg').toArray().map(p => getColourName(p.style?.backgroundColor));
+};
 
 const addRow = () => {
   $('.board').append(`
@@ -32,41 +33,41 @@ const addRow = () => {
         <div class="cluepeg"></div>
       </div>
     </div>
-  `)
-}
+  `);
+};
 
 const disablePreviousAttempt = () => {
-  $('.attempt .peg').off('click')
-  $('.attempt .cluepegs').off('click')
+  $('.attempt .peg').off('click');
+  $('.attempt .cluepegs').off('click');
 
-  $('.attempt').removeClass('attempt')
-}
+  $('.attempt').removeClass('attempt');
+};
 
 const addAttempt = () => {
-  disablePreviousAttempt()
+  disablePreviousAttempt();
 
-  addRow()
+  addRow();
 
   $('.attempt .peg').click(function () {
-    $(this).css('background-color', getNextColour(getPegColour($(this))))
-  })
+    $(this).css('background-color', getNextColour(getPegColour($(this))));
+  });
 
   $('.attempt .cluepegs').click(function () {
-    const guess = getGuess()
+    const guess = getGuess();
     if (!guess.includes(undefined)) {
       if (attempts < maxAttempts) {
-        addAttempt()
+        addAttempt();
       } else {
-        alert('Game Over ...')
+        alert('Game Over ...');
       }
     }
-  })
+  });
 
-  attempts++
-}
+  attempts++;
+};
 
 $(() => {
 
-  addAttempt()
+  addAttempt();
 
 });
