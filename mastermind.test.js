@@ -2,8 +2,8 @@
 const { colours, getRandomColour, generateAnswer, checkAnswers, getNextColour } = require('./mastermind.js')
 
 test('#colours', () => {
-  expect(colours.length).toBe(7);
-  expect(colours).toEqual(['red', 'orange', 'yellow', 'green', 'blue', 'indigo', 'violet']);
+  expect(colours.length).toBe(6);
+  expect(colours).toEqual(['aqua', 'red', 'yellow', 'green', 'blue', 'indigo']);
 });
 
 test('#getRandomColour', () => {
@@ -23,12 +23,11 @@ test('#checkAnswers', () => {
 });
 
 test('#getNextColour', () => {
-  expect(getNextColour()).toBe('red');
-  expect(getNextColour('red')).toBe('orange');
-  expect(getNextColour('orange')).toBe('yellow');
+  expect(getNextColour()).toBe('aqua');
+  expect(getNextColour('aqua')).toBe('red');
+  expect(getNextColour('red')).toBe('yellow');
   expect(getNextColour('yellow')).toBe('green');
   expect(getNextColour('green')).toBe('blue');
   expect(getNextColour('blue')).toBe('indigo');
-  expect(getNextColour('indigo')).toBe('violet');
-  expect(getNextColour('violet')).toBe('red');
+  expect(getNextColour('indigo')).toBe('aqua');
 });
