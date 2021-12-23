@@ -1,5 +1,5 @@
 /* eslint-disable no-undef */
-const { colours, getRandomColour, generateAnswer, checkAnswers, getNextColour } = require('./mastermind.js')
+const { colours, getRandomColour, generateAnswer, checkAnswer, getNextColour } = require('./mastermind.js');
 
 test('#colours', () => {
   expect(colours.length).toBe(6);
@@ -15,11 +15,11 @@ test('#generateAnswer', () => {
   expect(generateAnswer().length).toBe(4);
 });
 
-test('#checkAnswers', () => {
-  expect(checkAnswers(['red', 'blue', 'green', 'yellow'], ['red', 'blue', 'green', 'yellow'])).toEqual([4, 0]);
-  expect(checkAnswers(['red', 'blue', 'green', 'yellow'], ['red', 'blue', 'green', 'red'])).toEqual([3, 0]);
-  expect(checkAnswers(['red', 'red', 'red', 'blue'], ['red', 'red', 'blue', 'blue'])).toEqual([3, 0]);
-  expect(checkAnswers(['red', 'red', 'red', 'red'], ['red', 'red', 'red', 'red'])).toEqual([4, 0]);
+test('#checkAnswer', () => {
+  expect(checkAnswer(['red', 'blue', 'green', 'yellow'], ['red', 'blue', 'green', 'yellow'])).toEqual([4, 0]);
+  expect(checkAnswer(['red', 'blue', 'green', 'yellow'], ['red', 'blue', 'green', 'red'])).toEqual([3, 0]);
+  expect(checkAnswer(['red', 'red', 'red', 'blue'], ['red', 'red', 'blue', 'blue'])).toEqual([3, 0]);
+  expect(checkAnswer(['red', 'red', 'red', 'red'], ['red', 'red', 'red', 'red'])).toEqual([4, 0]);
 });
 
 test('#getNextColour', () => {
