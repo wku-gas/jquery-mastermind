@@ -43,6 +43,17 @@ const disablePreviousAttempt = () => {
   $('.attempt').removeClass('attempt');
 };
 
+const setCluePegs = ([blacks, whites]) => {
+  const cluePegs = $('.attempt .cluepeg').toArray();
+  let n = 0;
+  for (let i = 0; i < blacks; i++) {
+    cluePegs[i].style.backgroundColor = 'black';
+  }
+  for (let i = n; i < whites; i++) {
+    cluePegs[i].style.backgroundColor = 'whites';
+  }
+};
+
 const addAttempt = () => {
   disablePreviousAttempt();
 
@@ -55,6 +66,8 @@ const addAttempt = () => {
   $('.attempt .cluepegs').click(function () {
     const guess = getGuess();
     if (!guess.includes(undefined)) {
+      const clues = checkAnswer(guess, answer);
+      setCluePegs(clues);
       if (attempts < maxAttempts) {
         addAttempt();
       } else {
