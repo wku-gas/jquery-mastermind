@@ -48,20 +48,23 @@ const setCluePegs = ([blacks, whites]) => {
   let n = 0;
   for (let i = 0; i < blacks; i++) {
     cluePegs[i].style.backgroundColor = 'black';
+    n++;
   }
-  for (let i = n; i < whites; i++) {
-    cluePegs[i].style.backgroundColor = 'whites';
+  for (let i = 0; i < whites; i++) {
+    cluePegs[i + n].style.backgroundColor = 'white';
   }
 };
+
+function changePegColourOnClick() {
+  $(this).css('background-color', getNextColour(getPegColour($(this))));
+}
 
 const addAttempt = () => {
   disablePreviousAttempt();
 
   addRow();
 
-  $('.attempt .peg').click(function () {
-    $(this).css('background-color', getNextColour(getPegColour($(this))));
-  });
+  $('.attempt .peg').click(changePegColourOnClick);
 
   $('.attempt .cluepegs').click(function () {
     const guess = getGuess();
