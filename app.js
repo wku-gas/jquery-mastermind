@@ -45,6 +45,7 @@ const addRow = (previousGuess) => {
 };
 
 const disablePreviousAttempt = () => {
+  $('.attempt .pegs').css('opacity', 0.3);
   $('.attempt .peg').off('click');
   $('.attempt .cluepegs').off('click');
 
