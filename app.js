@@ -18,7 +18,7 @@ const getGuess = () => {
   return $('.attempt .peg').toArray().map(p => getColourName(p.style?.backgroundColor));
 };
 
-const addRow = () => {
+const addRow = (previousGuess) => {
   $('.board').append(`
   <div class="row attempt">
       <div class="pegs">
@@ -35,6 +35,13 @@ const addRow = () => {
       </div>
     </div>
   `);
+
+  if (previousGuess) {
+    const pegs = $('.attempt .peg').toArray();
+    for (let i = 0; i < 4; i++) {
+      pegs[i].style.backgroundColor = previousGuess[i];
+    }
+  }
 };
 
 const disablePreviousAttempt = () => {
@@ -71,17 +78,17 @@ const submitGuess = () => {
     if (winGame(clues)) {
       alert('You win!!!');
     } else if (attempts < maxAttempts) {
-      addAttempt();
+      addAttempt(guess);
     } else {
       alert('Game Over ...');
     }
   }
 };
 
-const addAttempt = () => {
+const addAttempt = (guess) => {
   disablePreviousAttempt();
 
-  addRow();
+  addRow(guess);
 
   $('.attempt .peg').click(changePegColourOnClick);
 
