@@ -1,6 +1,7 @@
 /* eslint-disable no-undef */
-const answer = generateAnswer();
-const maxAttempts = 5;
+const maxAttempts = 6;
+
+let answer;
 let attempts = 0;
 
 const getPegColour = $peg => {
@@ -59,6 +60,24 @@ function changePegColourOnClick() {
   $(this).css('background-color', getNextColour(getPegColour($(this))));
 }
 
+const winGame = ([blacks]) => blacks === 4;
+
+const submitGuess = () => {
+  const guess = getGuess();
+  if (!guess.includes(undefined)) {
+    const clues = checkAnswer(guess, answer);
+    setCluePegs(clues);
+
+    if (winGame(clues)) {
+      alert('You win!!!');
+    } else if (attempts < maxAttempts) {
+      addAttempt();
+    } else {
+      alert('Game Over ...');
+    }
+  }
+};
+
 const addAttempt = () => {
   disablePreviousAttempt();
 
@@ -66,24 +85,18 @@ const addAttempt = () => {
 
   $('.attempt .peg').click(changePegColourOnClick);
 
-  $('.attempt .cluepegs').click(function () {
-    const guess = getGuess();
-    if (!guess.includes(undefined)) {
-      const clues = checkAnswer(guess, answer);
-      setCluePegs(clues);
-      if (attempts < maxAttempts) {
-        addAttempt();
-      } else {
-        alert('Game Over ...');
-      }
-    }
-  });
+  $('.attempt .cluepegs').click(submitGuess);
 
   attempts++;
 };
 
+const startGame = () => {
+  answer = generateAnswer();
+  addAttempt();
+};
+
 $(() => {
 
-  addAttempt();
+  startGame();
 
 });
